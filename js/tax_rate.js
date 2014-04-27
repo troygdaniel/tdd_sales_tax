@@ -1,4 +1,4 @@
-Item = function (options) {
+TaxRate = function (options) {
   
   initialize(options);
 

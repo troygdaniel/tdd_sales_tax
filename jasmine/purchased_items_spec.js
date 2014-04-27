@@ -4,7 +4,7 @@ describe("Purchased Items spec", function() {
   
   describe("Constructor", function() {
     
-    it("should have an instance of a Purchased Item", function () {
+    it("can instaniate PurchasedItems", function () {
         // noteView = new Take.NoteView({note:note, socket: socket});
         // expect(noteView.note).toEqual(note);
     });

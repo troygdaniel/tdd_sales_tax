@@ -4,7 +4,7 @@ describe("Tax Rate spec", function() {
   
   describe("Constructor", function() {
     
-    it("should have an instance of a Tax Rate", function () {
+    it("can instantiate a TaxRate", function () {
         // noteView = new Take.NoteView({note:note, socket: socket});
         // expect(noteView.note).toEqual(note);
     });

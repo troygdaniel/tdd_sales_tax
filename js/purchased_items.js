@@ -1,4 +1,4 @@
-Item = function (options) {
+PurchasedItems = function (options) {
   
   initialize(options);
 
