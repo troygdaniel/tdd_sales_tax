@@ -1,6 +1,5 @@
 //  Specs for Take.NoteView
 describe("Item spec", function() {
-  // var tabJSON = [{"text":"This is a test.","children":[{"text":"This is a child","children":[]}]},{"text":"This is another parent","children":[{"text":"This is another child","children":[{"text":"This is a grandchild","children":[]}]}]}];
   
   // input 1
   var book = new Item({desc: "book", type: "book", imported: false, price: 12.49});

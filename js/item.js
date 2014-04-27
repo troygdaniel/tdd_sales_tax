@@ -6,26 +6,9 @@
   - 'imported' is 'true' if the product is imported
 */
 Item = function (options) {
-  var type, price, description, isImported;
+  var type, price, description, isImporteds;
   
-  // TODO: create an init method for below
-  if (typeof options.price === "undefined") {
-    throw new Error("Missing required attribute 'price'"); 
-  }
-  price = options.price;  
-  setType(options.type);
-  description = options.desc;
-  isImported = options.imported;
-
-  /*
-    Private Methods
-    ---
-  */
-  function isValidType(itemType) {
-    if (Item.validTypes.indexOf(itemType) < 0)
-      return false;
-    return true;
-  }
+  initialize(options);
 
   /*
     Public Methods
@@ -38,6 +21,25 @@ Item = function (options) {
     else {
       console.error("Attempted to set invalid type of '"+itemType+"'"); 
     }
+  }
+
+  /*
+    Private Methods
+    ---
+  */
+  function initialize(options) {
+    if (typeof options.price === "undefined") {
+      throw new Error("Missing required attribute 'price'"); 
+    }
+    price = options.price;  
+    setType(options.type);
+    description = options.desc;
+    isImported = options.imported;
+  }
+  function isValidType(itemType) {
+    if (Item.validTypes.indexOf(itemType) < 0)
+      return false;
+    return true;
   }
 
   return {
