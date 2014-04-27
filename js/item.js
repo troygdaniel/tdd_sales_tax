@@ -44,7 +44,9 @@ Item = function (options) {
 
   return {
     setType: setType,
-    type: type
+    type: type,
+    description: description,
+    price: price
   };
 };
 // GLOBAL item types

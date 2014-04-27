@@ -1,42 +1,43 @@
 //  Specs for Take.NoteView
 describe("Tax Rate spec", function() {
-  
+  var options = {salesTaxRate: 0.1, importTaxRate: 0.05, exemptions: ["book", "food", "medical"]};
+
   describe("Constructor", function() {
     
-    it("can instantiate a TaxRate", function () {
-        var taxRate =  new TaxRate({salesTax: 0.1, importTax: 0.05, exemptions: ["book", "food", "medical"]});
+    it("instantiate a TaxRate", function () {
+        var taxRate =  new TaxRate(options);
         expect(taxRate).toEqual(taxRate);
     });
 
-    it("can access the importTax rate", function () {
-        var taxRate =  new TaxRate({salesTax: 0.1, importTax: 0.05, exemptions: ["book", "food", "medical"]});
-        expect(taxRate.importTax).toEqual(0.05);
+    it("has access the importTaxRate rate", function () {
+        var taxRate =  new TaxRate(options);
+        expect(taxRate.importTaxRate).toEqual(0.05);
     });
 
-    it("can access the salesTax rate", function () {
-        var taxRate =  new TaxRate({salesTax: 0.1, importTax: 0.05, exemptions: ["book", "food", "medical"]});
-        expect(taxRate.salesTax).toEqual(0.1);
+    it("has access the salesTaxRate rate", function () {
+        var taxRate =  new TaxRate(options);
+        expect(taxRate.salesTaxRate).toEqual(0.1);
     });
 
-    it("can access the exceptions", function () {
-        var taxRate =  new TaxRate({salesTax: 0.1, importTax: 0.05, exemptions: ["book", "food", "medical"]});
+    it("has access the exceptions", function () {
+        var taxRate =  new TaxRate(options);
         expect(taxRate.exemptions).toEqual(["book", "food", "medical"]);
     });
 
     it("rejects tax rates without sales tax", function () {
         expect(function () {
-                new TaxRate({importTax: 0.05, exemptions: ["book", "food", "medical"]});
-            }).toThrow(new Error("Missing required attribute 'salesTax'"));
+                new TaxRate({importTaxRate: 0.05, exemptions: ["book", "food", "medical"]});
+            }).toThrow(new Error("Missing required attribute 'salesTaxRate'"));
     });
 
     it("rejects tax rates without import tax", function () {
         expect(function () {
-				new TaxRate({salesTax: 0.1, exemptions: ["book", "food", "medical"]});
-        }).toThrow(new Error("Missing required attribute 'importTax'"));
+        new TaxRate({salesTaxRate: 0.1, exemptions: ["book", "food", "medical"]});
+        }).toThrow(new Error("Missing required attribute 'importTaxRate'"));
     });
 
     it("returns an empty array if there are no excemptions provided", function () {
-        var taxRate =  new TaxRate({salesTax: 0.1, importTax: 0.05});
+        var taxRate =  new TaxRate({salesTaxRate: 0.1, importTaxRate: 0.05});
         expect(taxRate.exemptions).toEqual([]);
     });
   });
