@@ -5,7 +5,7 @@
   - 'desc' describes the product
   - 'imported' is 'true' if the product is imported
 */
-Item = function (options) {
+var Item = function (options) {
   var type, price, description, isImported;
   
   initialize(options);
@@ -51,4 +51,3 @@ Item = function (options) {
 };
 // GLOBAL item types
 Item.validTypes = ["book", "food", "medical", "music", "perfume"];
-

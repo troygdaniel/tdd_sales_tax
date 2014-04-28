@@ -7,7 +7,7 @@ TaxRate
 Example use:
   > taxRate =  new TaxRate({salesTaxRate: 0.1, importTaxRate: 0.05, exemptions: [book, food, medical]});
 */
-TaxRate = function (options) {
+var TaxRate = function (options) {
   var salesTaxRate, importTaxRate, exemptions = [];
   initialize(options);
 
@@ -21,7 +21,7 @@ TaxRate = function (options) {
       if (item.type === exemptions[i]) {
         return true;
       }
-    };
+    }
     return false;
   }
 
@@ -35,11 +35,11 @@ TaxRate = function (options) {
     var n;
     if (isNotExempt(item) === true) {      
       n = item.price * salesTaxRate;
-      salesTax = parseFloat((Math.ceil(n*20)/20).toFixed(2))
+      salesTax = parseFloat((Math.ceil(n*20)/20).toFixed(2));
     }
     if (item.isImported === true) {
       n = item.price * importTaxRate;      
-      importTax = parseFloat((Math.ceil(n*20)/20).toFixed(2))
+      importTax = parseFloat((Math.ceil(n*20)/20).toFixed(2));
     }
     return parseFloat(salesTax + importTax);
   }
