@@ -1,19 +1,6 @@
 /*
-  + initialize ( t <TaxRates> )
-  - items (Array of <Item>)    
-  - tax_rate (describes sales and import tax)
-    { import: 0.05, sales: 0.10 }
-  + addItem ( i <Item> )
-  + items() returns the array of items
-  + sub_total
-  + total_tax
-  + total_amount
-  + receipt 
-
-  Example:
-  > purchases =  new PurchasedItems(taxRate)
-  > purchases.addItem(item)
-  > purchases.receipt
+Purchased Items
+- requires a taxRate 
 */
 PurchasedItems = function (_taxRate) {
   var _items = [], taxRate = _taxRate;
@@ -52,14 +39,15 @@ PurchasedItems = function (_taxRate) {
   // 3.  itemize to include qty and continue
   function receipt() {
     var itemizedList = "";
-    var salesTaxLine = "Sales Taxes: " + salesTax().toFixed(2);
-    var totalLine = "Total: " + totalAmount().toFixed(2);
+    var quantifiedItems = buildQuantifiedItems();
 
-    for (var i = 0; i < _items.length; i++) {
-      var item = _items[i];
-      itemizedList += "1 " + item.description + " : " + taxRate.costWithTax(item).toFixed(2) + "\n";
-    };
-    return itemizedList + salesTaxLine + "\n" + totalLine;
+    // new below    
+    for (var key in quantifiedItems) {
+      var qty = quantifiedItems[key].qty
+      var item = quantifiedItems[key].product
+      itemizedList += "" + qty + " " + item.description + " : " + taxRate.costWithTax(item).toFixed(2) + "\n";
+    }
+    return itemizedList + salesTaxLine() + "\n" + totalLine();
   }
 
   function items() {
@@ -70,6 +58,30 @@ PurchasedItems = function (_taxRate) {
     Private Methods
     ---
   */
+
+  function salesTaxLine() {
+    return "Sales Taxes: " + salesTax().toFixed(2);
+  }
+
+  function totalLine() {
+    return "Total: " + totalAmount().toFixed(2);
+  }
+
+  function buildQuantifiedItems() {
+    var quantifiedItems = {};
+    for (var i = 0; i < _items.length; i++) {      
+      if (typeof quantifiedItems[_items[i].description] === "undefined") {
+        quantifiedItems[_items[i].description] = {description: _items[i].description, product: _items[i]};
+      }
+      // setup the count to zero if first time
+      if (typeof quantifiedItems[_items[i].description].qty === "undefined") {
+        quantifiedItems[_items[i].description].qty=0;      
+      }       
+      quantifiedItems[_items[i].description].qty++;
+    }
+    return quantifiedItems;
+  }
+
   return {
     addItem: addItem,
     items: items,
