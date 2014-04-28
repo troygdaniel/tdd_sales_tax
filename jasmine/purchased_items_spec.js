@@ -44,8 +44,8 @@ describe("Purchased Items spec", function() {
       purchases.addItem(dietImportedChocolate);
       purchases.addItem(luxuryImportedPerfume);
 
-      // expect(purchases.salesTax().toFixed(2)).toEqual("7.65");
-      // expect(purchases.totalAmount().toFixed(2)).toEqual("65.15");
+      expect(purchases.salesTax().toFixed(2)).toEqual("7.65");
+      expect(purchases.totalAmount().toFixed(2)).toEqual("65.15");
     });
     it("(pending...) succesfully passes scenario for input #3", function () {
       
@@ -55,8 +55,8 @@ describe("Purchased Items spec", function() {
       purchases.addItem(pills);
       purchases.addItem(importedChocolate);
 
-      // expect(purchases.salesTax().toFixed(2)).toEqual("6.70");
-      // expect(purchases.totalAmount().toFixed(2)).toEqual("74.68");
+      expect(purchases.salesTax().toFixed(2)).toEqual("6.70");
+      expect(purchases.totalAmount().toFixed(2)).toEqual("74.68");
     });
 
 
