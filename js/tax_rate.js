@@ -29,14 +29,17 @@ TaxRate = function (options) {
     return !isExempt(item);
   }
 
+  // TODO: Clean up - painful to read
   function taxForItem(item) {
     var salesTax = 0, importTax = 0;
-    
-    if (isNotExempt(item) === true) {
-      salesTax = parseFloat((item.price * salesTaxRate));
+    var n;
+    if (isNotExempt(item) === true) {      
+      n = item.price * salesTaxRate;
+      salesTax = parseFloat((Math.ceil(n*20)/20).toFixed(2))
     }
     if (item.isImported === true) {
-      importTax = parseFloat((item.price * importTaxRate));
+      n = item.price * importTaxRate;      
+      importTax = parseFloat((Math.ceil(n*20)/20).toFixed(2))
     }
     return parseFloat(salesTax + importTax);
   }

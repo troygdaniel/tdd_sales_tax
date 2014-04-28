@@ -38,7 +38,7 @@ describe("Purchased Items spec", function() {
       expect(purchases.receipt()).toEqual("1 book : 12.49\n1 music CD : 16.49\n1 chocolate bar : 0.85\nSales Taxes: 1.50\nTotal: 29.83");
     });
 
-    it("(pending...) succesfully passes scenario for input #2", function () {
+    it("succesfully passes scenario for input #2", function () {
       
       var purchases = new PurchasedItems(taxRate);
       purchases.addItem(dietImportedChocolate);
@@ -47,7 +47,7 @@ describe("Purchased Items spec", function() {
       expect(purchases.salesTax().toFixed(2)).toEqual("7.65");
       expect(purchases.totalAmount().toFixed(2)).toEqual("65.15");
     });
-    it("(pending...) succesfully passes scenario for input #3", function () {
+    it("succesfully passes scenario for input #3", function () {
       
       var purchases = new PurchasedItems(taxRate);
       purchases.addItem(basicImportedPerfume);
