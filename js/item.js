@@ -6,7 +6,7 @@
   - 'imported' is 'true' if the product is imported
 */
 Item = function (options) {
-  var type, price, description, isImporteds;
+  var type, price, description, isImported;
   
   initialize(options);
 
@@ -22,7 +22,6 @@ Item = function (options) {
       console.error("Attempted to set invalid type of '"+itemType+"'"); 
     }
   }
-
   /*
     Private Methods
     ---
@@ -46,7 +45,8 @@ Item = function (options) {
     setType: setType,
     type: type,
     description: description,
-    price: price
+    price: price,
+    isImported: isImported
   };
 };
 // GLOBAL item types

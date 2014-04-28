@@ -2,7 +2,7 @@
 describe("Purchased Items spec", function() {
 
   // input 1
-  var book = new Item({desc: "just a book", type: "book", imported: false, price: 12.49});
+  var book = new Item({desc: "book", type: "book", imported: false, price: 12.49});
   var musicCD = new Item({desc: "music CD", type: "music", imported: false, price: 14.99});
   var chocolateBar = new Item({desc: "chocolate bar", type: "food", imported: false, price: 0.85});
 
@@ -23,31 +23,75 @@ describe("Purchased Items spec", function() {
         purchases = new PurchasedItems(taxRate);
         expect(purchases).toEqual(purchases);
     });
+  });
+  describe("Provided test scenarios", function() {
 
-    // it("can generate a receipt for scenario input #1", function () {
+    it("can generate a receipt for scenario input #1", function () {
       
-    //   var purchases = new PurchasedItems(taxRate);
-    //   purchases.addItem(book);
-    //   purchases.addItem(musicCD);
-    //   purchases.addItem(chocolateBar);
+      var purchases = new PurchasedItems(taxRate);
+      purchases.addItem(book);
+      purchases.addItem(musicCD);
+      purchases.addItem(chocolateBar);
 
-    //   expect(purchases.salesTax).toEqual(1.50);
-    //   expect(purchases.totalAmount).toEqual(29.83);
-    // });
+      expect(purchases.salesTax().toFixed(2)).toEqual("1.50");
+      expect(purchases.totalAmount().toFixed(2)).toEqual("29.83");
+      expect(purchases.receipt()).toEqual("1 book : 12.49\n1 music CD : 16.49\n1 chocolate bar : 0.85\nSales Taxes: 1.50\nTotal: 29.83");
+    });
+
+    it("(pending...) succesfully passes scenario for input #2", function () {
+      
+      var purchases = new PurchasedItems(taxRate);
+      purchases.addItem(dietImportedChocolate);
+      purchases.addItem(luxuryImportedPerfume);
+
+      // expect(purchases.salesTax().toFixed(2)).toEqual("7.65");
+      // expect(purchases.totalAmount().toFixed(2)).toEqual("65.15");
+    });
+    it("(pending...) succesfully passes scenario for input #3", function () {
+      
+      var purchases = new PurchasedItems(taxRate);
+      purchases.addItem(basicImportedPerfume);
+      purchases.addItem(perfume);
+      purchases.addItem(pills);
+      purchases.addItem(importedChocolate);
+
+      // expect(purchases.salesTax().toFixed(2)).toEqual("6.70");
+      // expect(purchases.totalAmount().toFixed(2)).toEqual("74.68");
+    });
+
+
+  });
+
+  describe("#addItem", function() {
 
     it("adds items to the array", function () {
         var purchases = new PurchasedItems(taxRate);
         purchases.addItem(book);
         expect(purchases.items()).toEqual([book]);
     });
+  });
+  describe("#salesTax", function() {
 
-    it("calculates taxes on an item", function () {
+    it("calculates taxes on perfume", function () {
+        var purchases = new PurchasedItems(taxRate);
+        purchases.addItem(perfume);
+        expect(purchases.salesTax().toFixed(2)).toEqual("1.90");
+    });
+    it("does not calculate taxes on book", function () {
         var purchases = new PurchasedItems(taxRate);
         purchases.addItem(book);
-        expect(purchases.salesTax()).toEqual(1.25);
+        expect(purchases.salesTax()).toEqual(0);
     });
-
   });
+  describe("#subTotal", function() {
 
+    it("calculates the subTotal", function () {
+        var purchases = new PurchasedItems(taxRate);
+        purchases.addItem(book);
+        expect(purchases.subTotal()).toEqual(12.49);
+        purchases.addItem(musicCD);
+        expect(purchases.subTotal()).toEqual(27.48);
+    });
+  });
 
 });

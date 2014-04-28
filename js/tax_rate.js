@@ -16,6 +16,34 @@ TaxRate = function (options) {
     Public Methods
     ---
   */
+  function isExempt(item) {
+    for (var i = 0; i < exemptions.length; i++) {
+      if (item.type === exemptions[i]) {
+        return true;
+      }
+    };
+    return false;
+  }
+
+  function isNotExempt(item) {
+    return !isExempt(item);
+  }
+
+  function taxForItem(item) {
+    var salesTax = 0, importTax = 0;
+    
+    if (isNotExempt(item) === true) {
+      salesTax = parseFloat((item.price * salesTaxRate));
+    }
+    if (item.isImported === true) {
+      importTax = parseFloat((item.price * importTaxRate));
+    }
+    return parseFloat(salesTax + importTax);
+  }
+
+  function costWithTax(item) {
+    return parseFloat( item.price + taxForItem(item) );
+  }
 
   // none
 
@@ -42,6 +70,10 @@ TaxRate = function (options) {
   return {
     importTaxRate: importTaxRate,
     salesTaxRate: salesTaxRate,
-    exemptions: exemptions
+    exemptions: exemptions,
+    isExempt: isExempt,
+    isNotExempt: isNotExempt, 
+    taxForItem: taxForItem,
+    costWithTax: costWithTax    
   };
 };
