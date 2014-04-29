@@ -46,7 +46,7 @@ taxRate.taxForItem(book);  // returns 0
 taxRate.taxForItem(musicCD);  // returns 1.5
 ```
 
-This allows the PurchasedItems class to use an instance of a TaxRate to calculate taxes.
+This allows the *PurchasedItems* class to use an instance of a TaxRate to calculate taxes.
 
 ```javascript
 var taxRate = new TaxRate({salesTaxRate: 0.1, importTaxRate: 0.05, exemptions: ["book", "food", "medical"]});
