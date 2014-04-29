@@ -9,8 +9,6 @@
  *    var taxRate =  new TaxRate(options);
  */
 
-/*
-*/
 var TaxRate = function (options) {
   var salesTaxRate, importTaxRate, exemptions = [];
 
