@@ -9,6 +9,17 @@ There are 3 main classes.
 - TaxRate configures the sales tax rate, import tax rate and lists exemptions from sales tax
 - PurchasedItems has the TaxRate and an array of Items
 
+The Item class was created to describe the product witout any understanding of taxes.  
+
+The TaxRate class can be configured with import tax rates, sales tax rates and exceptions from sales taxes.  TaxRate can identify if an item is exempt from taxes like so:
+```javascript
+// Define an item (product)
+var book = new Item({desc: "book", type: "book", imported: false, price: 12.49});
+```
+dsds
+
+The classes and instance variable names were intentionally lifted from the requirements to maintain the same shared understanding of the problem.  
+
 ```javascript
 // Define an item (product)
 var book = new Item({desc: "book", type: "book", imported: false, price: 12.49});
