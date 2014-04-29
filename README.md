@@ -62,15 +62,15 @@ purchases.totalAmount() // 28.98
 
 The classes and instance variable names were intentionally lifted from the requirements to maintain the same shared understanding of the problem.
 
-Relevant test cases:
+## Relevant test cases:
 	https://github.com/troygdaniel/tdd_sales_tax/blob/master/jasmine/purchased_items_spec.js
 	https://github.com/troygdaniel/tdd_sales_tax/blob/master/jasmine/tax_rate_spec.js
 	https://github.com/troygdaniel/tdd_sales_tax/blob/master/jasmine/item_spec.js
 
-Running example:
+## Running example:
 	http://troygdaniel.com/sales_tax_kata/jasmine/spec_runner.html
 
-JS source code:
+## JS source code:
 	https://github.com/troygdaniel/tdd_sales_tax/blob/master/js/item.js
 	https://github.com/troygdaniel/tdd_sales_tax/blob/master/js/purchased_items.js
 	https://github.com/troygdaniel/tdd_sales_tax/blob/master/js/tax_rate.js
