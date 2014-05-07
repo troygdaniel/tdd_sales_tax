@@ -55,7 +55,6 @@ var Item = function (options) {
     description = options.desc;
     isImported = options.imported;
     sku = options.sku;
-    console.log(options);    
     if (typeof options.sku === "undefined") {
       sku = getGuid();
     }
