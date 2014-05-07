@@ -76,9 +76,22 @@ var PurchasedItems = function (_taxRate) {
     // Iterate through the quantified items dictionary
     for (var key in simpleItems) {      
       // Generate the human readable line for the item
-      _itemizedList += "" + simpleItems[key].qty + " " + simpleItems[key].description + " : " + simpleItems[key].costWithTax + "\n";
+      _itemizedList += lineItem(simpleItems[key]);
     }
     return _itemizedList;
+  }
+  
+  function lineItem(simpleItem) {
+    var _lineItem = "##qty## ##description## : ##costWithTax##\n"
+    
+    _lineItem = parseTemplate(_lineItem, simpleItem, "qty");
+    _lineItem = parseTemplate(_lineItem, simpleItem, "description");
+    _lineItem = parseTemplate(_lineItem, simpleItem, "costWithTax");
+    return _lineItem;
+  }
+
+  function parseTemplate(template, obj, key) {
+    return template.replace("##"+key+"##", obj[key]);
   }
 
   function salesTaxLine() {
