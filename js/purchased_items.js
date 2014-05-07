@@ -68,6 +68,8 @@ var PurchasedItems = function (_taxRate) {
    */
 
   function itemizedList() {
+    var _itemizedList = "";
+
     // Create a dictionary of items with quantities
     var simpleItems = buildSimpleItems();
 
