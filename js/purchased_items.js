@@ -54,7 +54,6 @@ var PurchasedItems = function (_taxRate) {
 
   // Generate a human readable receipt
   function receipt() {
-    // Return the human readable receipt
     return itemizedList() + salesTaxLine() + "\n" + totalLine();
   }
 
@@ -75,15 +74,15 @@ var PurchasedItems = function (_taxRate) {
 
     // Iterate through the quantified items dictionary
     for (var key in simpleItems) {      
-      // Generate the human readable line for the item
       _itemizedList += lineItem(simpleItems[key]);
     }
+    // Return the human readable line for the item
     return _itemizedList;
   }
   
   function lineItem(simpleItem) {
-    var _lineItem = "##qty## ##description## : ##costWithTax##\n"
-    
+    var _lineItem = "##qty## ##description## : ##costWithTax##\n";
+
     _lineItem = parseTemplate(_lineItem, simpleItem, "qty");
     _lineItem = parseTemplate(_lineItem, simpleItem, "description");
     _lineItem = parseTemplate(_lineItem, simpleItem, "costWithTax");
@@ -115,7 +114,7 @@ var PurchasedItems = function (_taxRate) {
       var item = _items[i];
 
       // Setup the key using the item.description
-      if (hasDescriptionKey(quantifiedItems, item)) {
+      if (isNotDefined(quantifiedItems[item.sku])) {
         quantifiedItems[item.sku] = dictionaryForItem(item);
       }
 
@@ -125,8 +124,8 @@ var PurchasedItems = function (_taxRate) {
     return quantifiedItems;
   }
 
-  function hasDescriptionKey(quantifiedItems, item) {
-    return (typeof quantifiedItems[item.sku] === "undefined");
+  function isNotDefined(sku) {
+    return (typeof sku === "undefined");
   }
 
   function dictionaryForItem(item) {
