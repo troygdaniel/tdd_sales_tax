@@ -40,23 +40,24 @@ var Item = function (options) {
    * Private Methods
    * ---------------
    */
-
-   // initialize(options)
+   
   function initialize(options) {
 
     // Was the "price" option provided?
-    if (typeof options.price === "undefined") {
-      // Halt processing and throw an exception
-      throw new Error("Missing required attribute 'price'"); 
+    if (typeof options.price === "undefined") {      
+      throw new Error("Missing required attribute 'price'");  // Halt processing and throw an exception
     }
+    
     // setup the item using the options
     price = options.price;  
     setType(options.type);
     description = options.desc;
     isImported = options.imported;
     sku = options.sku;
+
+    // Was the sku provided?
     if (typeof options.sku === "undefined") {
-      sku = getGuid();
+      sku = getGuid(); // NO - generate a GUID for the item
     }
   }
 
@@ -70,13 +71,14 @@ var Item = function (options) {
     return true; // YES
   }
 
-
+  // random string
   function s4() {
       return Math.floor((1 + Math.random()) * 0x10000)
            .toString(16)
            .substring(1);
   };
 
+  // create a guid
   function getGuid() {
       return s4()+s4()+s4()+s4();
   }

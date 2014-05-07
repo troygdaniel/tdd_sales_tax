@@ -48,26 +48,19 @@ var TaxRate = function (options) {
     
     // Is this item not exempt from sales taxes?
     if (isNotExempt(item) === true) {
-
-      // Calculate the sales tax
-      calculatedTax = item.price * salesTaxRate;
-
-      // Round to the nearest nickel
-      salesTax = parseFloat((Math.ceil(calculatedTax*20)/20).toFixed(2));
+      
+      calculatedTax = item.price * salesTaxRate; // Calculate the sales tax      
+      salesTax = parseFloat((Math.ceil(calculatedTax*20)/20).toFixed(2)); // Round to the nearest nickel
     }
     
     // Is this item an imported item? 
     if (item.isImported === true) {
-
-      // Calculate the sales tax
-      calculatedTax = item.price * importTaxRate;
-
-      // Round to the nearest nickel
-      importTax = parseFloat((Math.ceil(calculatedTax*20)/20).toFixed(2));
+      
+      calculatedTax = item.price * importTaxRate; // Calculate the sales tax      
+      importTax = parseFloat((Math.ceil(calculatedTax*20)/20).toFixed(2)); // Round to the nearest nickel
     }
-
-    // Return the total taxes (sales + import)
-    return parseFloat(salesTax + importTax);
+    
+    return parseFloat(salesTax + importTax); // Return the total taxes (sales + import)
   }
 
   // Convenience method to return the item cost including tax
