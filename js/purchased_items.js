@@ -54,22 +54,8 @@ var PurchasedItems = function (_taxRate) {
 
   // Generate a human readable receipt
   function receipt() {
-    var itemizedList = "";
-
-    // Create a dictionary of items with quantities
-    var quantifiedItems = buildQuantifiedItems();
-
-    // Iterate through the quantified items dictionary
-    for (var key in quantifiedItems) {
-      var qty = quantifiedItems[key].qty;
-      var item = quantifiedItems[key].product;
-
-      // Generate the human readable line for the item
-      itemizedList += "" + qty + " " + item.description + " : " + taxRate.costWithTax(item).toFixed(2) + "\n";
-    }
-
     // Return the human readable receipt
-    return itemizedList + salesTaxLine() + "\n" + totalLine();
+    return itemizedList() + salesTaxLine() + "\n" + totalLine();
   }
 
   function items() {
@@ -81,6 +67,18 @@ var PurchasedItems = function (_taxRate) {
    * ---------------
    */
 
+  function itemizedList() {
+    // Create a dictionary of items with quantities
+    var simpleItems = buildSimpleItems();
+
+    // Iterate through the quantified items dictionary
+    for (var key in simpleItems) {      
+      // Generate the human readable line for the item
+      _itemizedList += "" + simpleItems[key].qty + " " + simpleItems[key].description + " : " + simpleItems[key].costWithTax + "\n";
+    }
+    return _itemizedList;
+  }
+
   function salesTaxLine() {
     return "Sales Taxes: " + salesTax().toFixed(2);
   }
@@ -90,29 +88,38 @@ var PurchasedItems = function (_taxRate) {
   }
 
   // Create a dictionary of items that have 
-  //  - 'product' representing the item
-  //  - 'quantity' of the similar items in the shopping cart
-  function buildQuantifiedItems() {
+  //  'product' representing the item
+  //  'quantity' of the similar items in the shopping cart
+  function buildSimpleItems() {
 
     // Initialize with an empty object
     var quantifiedItems = {};
 
     // Iterate through the shopping cart items
     for (var i = 0; i < _items.length; i++) {
+      var item = _items[i];
 
       // Setup the key using the item.description
-      if (typeof quantifiedItems[_items[i].description] === "undefined") {
-        quantifiedItems[_items[i].description] = {description: _items[i].description, product: _items[i]};
+      if (hasDescriptionKey(quantifiedItems, item)) {
+        quantifiedItems[item.sku] = dictionaryForItem(item);
       }
-      // Setup the count to zero initially
-      if (typeof quantifiedItems[_items[i].description].qty === "undefined") {
-        quantifiedItems[_items[i].description].qty=0;      
-      }
-      // Increment the quantity for every additional item
-      quantifiedItems[_items[i].description].qty++;
 
+      // Increment the quantity for every additional item
+      quantifiedItems[item.sku].qty++;
     }
     return quantifiedItems;
+  }
+
+  function hasDescriptionKey(quantifiedItems, item) {
+    return (typeof quantifiedItems[item.sku] === "undefined");
+  }
+
+  function dictionaryForItem(item) {
+    return {
+          qty: 0, 
+          description: item.description, 
+          costWithTax: taxRate.costWithTax(item).toFixed(2)
+    };
   }
 
   // Return the public methods and instance variables

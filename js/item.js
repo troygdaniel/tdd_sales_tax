@@ -10,7 +10,7 @@
  */
  
 var Item = function (options) {
-  var type, price, description, isImported;
+  var type, price, description, isImported, sku;
   
   if (typeof options === "undefined")
     throw new Error("Missing required options when instantiating Item"); 
@@ -23,7 +23,7 @@ var Item = function (options) {
    * --------------
    */
 
-  // Set the item type and raise and quietly raise errors for invalid types
+  // Set the item type and quietly raise errors for invalid types
   function setType(itemType) {
 
     // Is the string supplied a valid type?
@@ -54,6 +54,9 @@ var Item = function (options) {
     setType(options.type);
     description = options.desc;
     isImported = options.imported;
+    if (typeof options.sku === "undefined") {
+      sku = getGuid();
+    }
   }
 
   // Is the provided itemType a valid type?
@@ -66,10 +69,22 @@ var Item = function (options) {
     return true; // YES
   }
 
+
+  function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+           .toString(16)
+           .substring(1);
+  };
+
+  function getGuid() {
+      return s4()+s4()+s4()+s4();
+  }
+
   // Make available the public methods
   return {
     setType: setType,
     type: type,
+    sku: sku,
     description: description,
     price: price,
     isImported: isImported

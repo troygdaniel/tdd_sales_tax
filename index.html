@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Sales Tax Kata</title>
+
+<script type="text/javascript" src="js/item.js"></script>
+<script type="text/javascript" src="js/purchased_items.js"></script>
+<script type="text/javascript" src="js/tax_rate.js"></script>
+<script type="text/javascript" src="js/vendor/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(function(){
+  window.outputString = "";
+  // Define an item (product)
+  window.book = new Item({desc: "book", type: "book", imported: false, price: 12.49});
+  window.musicCD = new Item({desc: "music CD", type: "music", imported: false, price: 14.99});
+
+  // TaxRate configured with import tax rates, sales tax rates and exceptions from sales taxes
+  window.taxRate = new TaxRate({salesTaxRate: 0.1, importTaxRate: 0.05, exemptions: ["book", "food", "medical"]});
+
+  // Create a shopping cart
+  window.purchases = new PurchasedItems(taxRate);
+  // Add items 
+  purchases.addItem(book);
+
+  // Display running totals
+  window.receipt = purchases.receipt();
+
+  slap(taxRate.isExempt(book), "taxRate.isExempt(book)"); 
+  slap(taxRate.isExempt(musicCD), "taxRate.isExempt(musicCD)"); 
+  slap(purchases.salesTax(), "purchases.salesTax()"); 
+  slap(receipt, "receipt"); 
+
+});
+
+function slap(msg, description) {
+  if (typeof description !== "undefined")
+      window.outputString += description + " -> \n";
+  window.outputString += msg + "\n\n";
+  $("#outputString").html(outputString);
+}
+
+</script>
+
+</head>
+<body>
+  <pre id="outputString">loading</pre>
+</body>
+</html>

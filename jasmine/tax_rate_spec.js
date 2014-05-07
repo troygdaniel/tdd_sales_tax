@@ -33,7 +33,7 @@ describe("Tax Rate spec", function() {
         }).toThrow(new Error("Missing required attribute 'importTaxRate'"));
     });    
   });
-  describe("Exceptions", function() {
+  describe("Exemptions", function() {
 
     it("has access the exceptions", function () {
         var taxRate =  new TaxRate(options);
