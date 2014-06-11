@@ -3,10 +3,10 @@
  * 'taxRate' is a required paramater
  *
  * Example use:
- *  purchases = new PurchasedItems(taxRate);
- *  purchases.addItem(book);
- *  purchases.addItem(musicCD);
- *  purchases.receipt()
+ *    purchases = new PurchasedItems(taxRate);
+ *    purchases.addItem(book);
+ *    purchases.addItem(musicCD);
+ *    purchases.receipt()
  */
 var PurchasedItems = function (_taxRate) {
   var _items = [], taxRate = _taxRate;
@@ -102,8 +102,8 @@ var PurchasedItems = function (_taxRate) {
   }
 
   // Create a dictionary of items that have 
-  //  'product' representing the item
-  //  'quantity' of the similar items in the shopping cart
+  // 'product' representing the item
+  // 'quantity' of the similar items in the shopping cart
   function buildSimpleItems() {
 
     // Initialize with an empty object

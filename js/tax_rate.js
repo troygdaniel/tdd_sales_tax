@@ -48,16 +48,12 @@ var TaxRate = function (options) {
     
     // Is this item not exempt from sales taxes?
     if (isNotExempt(item) === true) {
-      
-      calculatedTax = item.price * salesTaxRate; // Calculate the sales tax      
-      salesTax = parseFloat((Math.ceil(calculatedTax*20)/20).toFixed(2)); // Round to the nearest nickel
+      salesTax = parseFloat(roundToNickel(item.price * salesTaxRate)); // Round to the nearest nickel
     }
     
     // Is this item an imported item? 
     if (item.isImported === true) {
-      
-      calculatedTax = item.price * importTaxRate; // Calculate the sales tax      
-      importTax = parseFloat((Math.ceil(calculatedTax*20)/20).toFixed(2)); // Round to the nearest nickel
+      importTax = parseFloat(roundToNickel(item.price * importTaxRate)); // Round to the nearest nickel
     }
     
     return parseFloat(salesTax + importTax); // Return the total taxes (sales + import)
@@ -72,6 +68,10 @@ var TaxRate = function (options) {
    * Private Methods
    * ---------------
    */
+
+   function roundToNickel(amount) {
+    return (Math.ceil(amount*20)/20).toFixed(2);
+   }
 
   // Initialize the TaxRate object with the given options
   function initialize(options) {
